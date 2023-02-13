@@ -1,3 +1,9 @@
-vite
-classnames
-react-router-dom
+# for frontend (npm, to os)
+# vite
+# classnames
+# react-router-dom
+
+
+# for backend (pip, to venv)
+fastapi
+sqlalchemy
