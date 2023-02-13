@@ -3,20 +3,27 @@
 """
 from fastapi import FastAPI
 
+from starlette.middleware.cors import CORSMiddleware
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import sqlalchemy_imageattach
+from sqlalchemy_imageattach.stores.fs import HttpExposedFileSystemStore
 
-from .. import settings
+import settings
 
 server = FastAPI(debug=settings.DEBUG_MODE)
 
 session_maker = sessionmaker(bind=create_engine(settings.DEV_DATABASE_URL))
 
-store = sqlalchemy_imageattach.stores.fs.HttpExposedFileSystemStore(
-    path=settings.IMAGES_FOLDER,
-    base_url=settings.IMAGES_URL
-)
+store = HttpExposedFileSystemStore(settings.IMAGES_FOLDER)
 
-print(settings.BASE_DIR)
-print(settings.IMAGES_FOLDER)
+# server.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=['*'],
+#     allow_credentials=True,
+#     allow_methods=['*'],
+#     allow_headers=['*']
+# )
+
+import api.api

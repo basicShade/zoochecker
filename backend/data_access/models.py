@@ -8,7 +8,6 @@ from sqlalchemy_imageattach.entity import Image, image_attachment
 Base = declarative_base()
 
 
-
 class Receipt(Base):
     """Receipt model"""
     __tablename__ = 'receipt'
@@ -20,11 +19,19 @@ class Receipt(Base):
     data = Column(JSON, nullable=True)
     status = Column(String(16), nullable=False)
 
+    def dict(self):
+        return {
+            'name': self.name,
+            'created': self.created,
+            'status': self.status,
+            'data': self.data
+        }
+
 
 class ReceiptImage(Base, Image):
     """Receipt image model"""
     __tablename__ = 'receipt_image'
 
     receipt_id = Column(Integer, ForeignKey('receipt.id'), primary_key=True)
-    receipt = relationship('Receipt')
+    # receipt = relationship('Receipt')
 
