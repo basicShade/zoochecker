@@ -157,5 +157,6 @@ dmypy.json
 .idea
 
 media/
+images/
 
 *.pem

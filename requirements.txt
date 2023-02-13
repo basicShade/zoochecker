@@ -6,5 +6,9 @@
 
 # for backend (pip, to venv)
 fastapi
+uvicorn
+psycopg2
 sqlalchemy
 SQLAlchemy-ImageAttach
+requests
+#sudo apt-get install libmagickwand-dev
