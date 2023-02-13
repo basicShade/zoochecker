@@ -1,11 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import {BrowserRouter, Routes, Route } from 'react-router-dom'
+import { ReceiptCreate } from './pages'
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <div> Hello</div>
+
+  return(
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<ReceiptCreate/>} />
+
+      </Routes>
+    </BrowserRouter> 
+ 
+
+
 
   )
 }
