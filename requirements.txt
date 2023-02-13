@@ -7,3 +7,4 @@
 # for backend (pip, to venv)
 fastapi
 sqlalchemy
+SQLAlchemy-ImageAttach
