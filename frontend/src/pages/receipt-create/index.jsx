@@ -1,6 +1,7 @@
 import { Form, FileInput, Button, Input } from '../../components'
 import styles from './styles.module.css'
 import { useState } from 'react'
+import api from '../../api'
 
 const ReceiptCreate = () => {
     const [ receiptFile, setReceiptFile ] = useState(null)
@@ -15,7 +16,14 @@ const ReceiptCreate = () => {
                     name: receiptName,
                     image: receiptFile
                 }
-                console.log(data)
+                api
+                .createRecipe(data)
+                // .then(res => {
+                //     history.push(`/recipes/${res.id}`)
+                //   })
+                .catch(err => {
+                    return alert('Введите название и выберите фото')
+                })
             }}
             >
 
@@ -26,13 +34,14 @@ const ReceiptCreate = () => {
                         setReceiptName(value)
                     }}
                 />
+
             
                 <FileInput
                     onChange={file => {
                     setReceiptFile(file)
                 }}
                     className={styles.fileInput}
-                    label='Загрузить фото!'>
+                    label='Фото'>
                 </FileInput>
 
                 <Button>Сохранить чек</Button>

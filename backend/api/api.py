@@ -11,10 +11,16 @@ from data_access.models import Receipt
 from sqlalchemy_imageattach.context import store_context
 
 
-@server.get('/hi')
-def get_hi():
-    print('hey')
-    return Response(status_code=200)
+# @server.get('/hi')
+# def get_hi():
+#     with session_maker() as session:
+#         with store_context(store) as s:
+#             receipt = session.query(Receipt).get(45)
+#             image = receipt.image[0]
+#             breakpoint()
+#             print('ok')
+
+#     return Response(status_code=200)
 
 @server.post('/create_receipt', response_model=GetReceipt, status_code=status.HTTP_201_CREATED)
 def create_receipt(request: Request, payload: CreateReceipt):
@@ -31,10 +37,9 @@ def create_receipt(request: Request, payload: CreateReceipt):
         ext = format.split('/')[-1]
         image_obj = base64.b64decode(imgstr)
         with store_context(store):
-            breakpoint()
             image = receipt.image.from_blob(image_obj)
             session.add(image)
-            session.add(receipt)
+            session.add(receipt)  # check requests quantity
             session.commit()
         receipt = receipt.dict()
     return receipt

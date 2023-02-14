@@ -75,7 +75,7 @@
 }
 
 .fileInput {
-  margin-bottom: 72px;
+  margin-bottom: 52px;
 }
 
 .button {
@@ -94,7 +94,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 820px) {
+@media screen and (max-width: 680px) {
   .ingredientsInputs {
     display: block;
     text-align: left;

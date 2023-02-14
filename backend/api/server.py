@@ -18,12 +18,12 @@ session_maker = sessionmaker(bind=create_engine(settings.DEV_DATABASE_URL))
 
 store = HttpExposedFileSystemStore(settings.IMAGES_FOLDER)
 
-# server.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=['*'],
-#     allow_credentials=True,
-#     allow_methods=['*'],
-#     allow_headers=['*']
-# )
+server.add_middleware(
+    CORSMiddleware,
+    allow_origins=['http://localhost:5173'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
 
 import api.api

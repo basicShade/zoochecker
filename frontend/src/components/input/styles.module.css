@@ -11,13 +11,15 @@
   display: flex;
   align-items: center;
   width: 100%;
-  justify-content: space-between;
 }
 
 .inputLabelText {
   padding-right: 30px;
   text-align: left;
   flex: 1;
+  max-width: 132px;
+  min-width: 132px;
+  
 }
 
 .inputField {
@@ -28,7 +30,7 @@
   border: 0.5px solid rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (max-width: 730px) {
+@media screen and (max-width: 680px) {
   .inputLabel {
     display: block;
     text-align: left;

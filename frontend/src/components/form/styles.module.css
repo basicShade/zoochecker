@@ -1,5 +1,6 @@
 .form {
   max-width: 770px;
+  min-width: 350px;
   background: #FFF;
   border: 1px solid #EEE;
   box-sizing: border-box;
@@ -8,8 +9,8 @@
   padding: 54px 100px 70px 68px;
 }
 
-@media screen and (max-width: 730px) {
+@media screen and (max-width: 570px) {
   .form {
-    padding: 20px;
+    padding: 54px 30px 30px 30px;
   }
 }

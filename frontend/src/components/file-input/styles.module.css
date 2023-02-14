@@ -2,14 +2,19 @@
   display: flex;
   align-items: center;
   width: 100%;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
 }
 
 .label {
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
   padding-right: 30px;
   text-align: left;
   flex: 1;
-  max-width: 230px;
+  max-width: 132px;
+  min-width: 132px;
 }
 
 .fileInput {
@@ -32,10 +37,19 @@
 }
 
 .image {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
   background-size: cover;
   background-position: 50% 50%;
   border-radius: 5px;
   border: 1px solid black;
+}
+
+@media screen and (max-width: 680px) {
+  .label {
+    max-width: 25px;
+    min-width: 25px;
+  }
+
+
 }
