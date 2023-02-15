@@ -1,4 +1,4 @@
-import { Form, FileInput, Button, Input } from '../../components'
+import { Item } from '../../components'
 import styles from './styles.module.css'
 import { useState, useEffect } from 'react'
 import api from '../../api'
@@ -14,38 +14,26 @@ const ReceiptEdit = () => {
     const [fetchReceipt, isLoading, error] = useFetching(async (id) => {
         const response = await api.getReceipt(id)
         setReceipt(response.data)
-        setItems(response.data.data)
+        setItems(response.data.data.items)
     })
-
-    function iterateItems(json) {
-        result = []
-        {Object.keys(json).map((k, i) => {
-            result.append(
-                <div key={i}>
-                    <div>item: {receipt.data[k]}</div>
-                </div>
-            )
-        })}
-        return result.join('')
-    }
 
     useEffect(() => {
         fetchReceipt(params.id)
+ 
     }, [])
 
     return (
         <div>
             {isLoading
                 ? <div>hey</div>
-                : <div>{receipt.name}
+                : <div>
+                    <h1>{receipt.name}</h1>
+                    <div>Дата: {receipt.data.date}</div>
+                    <div>Заведение: {receipt.data.merchant_name}</div>
                     {
-                    Object.keys(items).map((key, index) => {
+                    Object.entries(items).map((item) => {
                         return (
-                        <div key={index} style={{marginTop: 15, marginLeft: 10}}>
-                            Позиция {key}
-                            <div>Количество: {items[key]['quantity']}</div>
-                            <div>Сумма: {items[key]['total']}</div>
-                        </div>
+                            <Item key={item[0]} obj={item}/>
                         )
                     })
 

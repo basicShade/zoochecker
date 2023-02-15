@@ -1,0 +1,57 @@
+.item {
+    font-family: Montserrat, Helvetica, Arial, sans-serif;
+    max-width: 770px;
+    min-width: 350px;
+    display: flex;
+    padding: 15px;
+    border: 2px solid lightblue;
+    margin-top: 15px;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+/* .item {
+    font-family: Montserrat, Helvetica, Arial, sans-serif;
+    max-width: 770px;
+    min-width: 350px;
+    box-sizing: border-box;
+    padding: 15px;
+    border: 2px solid lightblue;
+    border-radius: 5px;
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: center;
+    display: flexbox;
+
+
+
+} */
+
+.itemDesc {
+    justify-content: space-between;
+    display: flex;
+    max-width: 50%;
+    min-width: 150px;
+
+}
+
+.itemQty {
+    /* position: relative;
+    float: right; */
+    padding-left: 3%;
+}
+
+.itemAmt {
+    /* position: relative;
+    float: right; */
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+
+
+  
+
+@media screen and (max-width: 720px) {
+
+}

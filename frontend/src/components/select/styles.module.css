@@ -1,6 +1,5 @@
 .input {
   margin-right: 10px;
-  /* margin-bottom: 25px; */
   font-family: Montserrat, Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -8,7 +7,6 @@
 }
 
 .inputLabel {
-  margin-bottom: 25px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -42,6 +40,6 @@
   }
 
   .inputField {
-    width: 92%;
+    width: 85%;
   }
 }
