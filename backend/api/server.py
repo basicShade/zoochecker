@@ -14,7 +14,13 @@ import settings
 
 server = FastAPI(debug=settings.DEBUG_MODE)
 
-session_maker = sessionmaker(bind=create_engine(settings.DEV_DATABASE_URL))
+session_maker = sessionmaker(
+    bind=create_engine(
+        settings.DEV_DATABASE_URL,
+        echo=settings.SQL_ECHO,
+        # implicit_returning=False
+    )
+)
 
 store = HttpExposedFileSystemStore(settings.IMAGES_FOLDER)
 

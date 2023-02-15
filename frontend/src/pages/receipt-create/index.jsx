@@ -17,10 +17,11 @@ const ReceiptCreate = () => {
                     image: receiptFile
                 }
                 api
-                .createRecipe(data)
-                // .then(res => {
-                //     history.push(`/recipes/${res.id}`)
-                //   })
+                .createReceipt(data)
+                .then(res => {
+                    const result = res
+                    // history.push(`/recipes/${res.id}`)
+                  })
                 .catch(err => {
                     return alert('Введите название и выберите фото')
                 })

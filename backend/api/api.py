@@ -1,12 +1,14 @@
 import base64
+import json
 from datetime import datetime
 from requests import get
-from fastapi import Request, Response
+from fastapi import HTTPException, Request, Response
 
 from starlette import status
 
 from api.schemas import CreateReceipt, GetReceipt
 from api.server import server, session_maker, store
+from api.schemas import OCRSchema
 from data_access.models import Receipt
 from sqlalchemy_imageattach.context import store_context
 
@@ -22,15 +24,30 @@ from sqlalchemy_imageattach.context import store_context
 
 #     return Response(status_code=200)
 
+@server.get('/receipts/{receipt_id}')
+def get_receipt(receipt_id: int):
+    with session_maker() as session:
+        receipt = session.query(Receipt).get(receipt_id)
+        if not receipt:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f'Receipt with ID={receipt_id} is not found'
+            )
+        return receipt
+        
+
 @server.post('/create_receipt', response_model=GetReceipt, status_code=status.HTTP_201_CREATED)
 def create_receipt(request: Request, payload: CreateReceipt):
     with session_maker() as session:
+        ocr_results = {}
+        with open('api/dummy.json', 'rb') as dummy:
+            ocr_results = OCRSchema.parse_raw(dummy.read())
+
         receipt = Receipt(
             created=datetime.utcnow(),
             name=payload.name,
-            data={"beer": {"quantity": 2, "total": 100}},
-            status='ocr_succeed'
-
+            success=ocr_results.success,
+            data=ocr_results.receipts[0].dict()
         )
 
         format, imgstr = payload.image.split(';base64,')
@@ -38,8 +55,8 @@ def create_receipt(request: Request, payload: CreateReceipt):
         image_obj = base64.b64decode(imgstr)
         with store_context(store):
             image = receipt.image.from_blob(image_obj)
+            session.add(receipt)
             session.add(image)
-            session.add(receipt)  # check requests quantity
             session.commit()
-        receipt = receipt.dict()
+        receipt=receipt.dict()
     return receipt

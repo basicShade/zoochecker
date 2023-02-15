@@ -1,11 +1,34 @@
+import json
+import pprint
+
 from enum import Enum
 from datetime import datetime
 
-from pydantic import BaseModel, validator
+from typing import Optional, List, Union, Dict, Any
 
-class Status(Enum):
-    ocr_failed = 'orc_failed'
-    ocr_succeed = 'ocr_succeed'
+from pydantic import BaseModel, validator, Json
+
+# class Status(Enum):
+#     ocr_failed = False
+#     ocr_succeed = True
+
+
+class ItemSchema(BaseModel):
+    amount: int
+    description: str
+    qty: Optional[int]
+    unitPrice: Optional[int]
+
+
+class ReceiptSchema(BaseModel):
+    merchant_name: Optional[str]
+    date: Union[datetime, str]
+    items: List[ItemSchema]
+
+
+class OCRSchema(BaseModel):
+    success: bool
+    receipts: List[ReceiptSchema]
 
 
 class CreateReceipt(BaseModel):
@@ -21,5 +44,16 @@ class CreateReceipt(BaseModel):
 class GetReceipt(BaseModel):
     name: str
     created: datetime
-    status: str
+    success: bool
     data: dict
+
+if __name__ == '__main__':
+    with open('dummy.json', 'rb') as f:
+        # x = json.load(f)
+        y = OCRSchema.parse_raw(f.read())
+        pprint.pprint(y)
+
+
+
+
+0

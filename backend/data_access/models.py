@@ -1,8 +1,9 @@
 """
 Описание sqlalchemy моделей
 """
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Identity, JSON
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Identity, Boolean
 from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy_imageattach.entity import Image, image_attachment
 
 Base = declarative_base()
@@ -16,14 +17,14 @@ class Receipt(Base):
     created = Column(DateTime, nullable=False)
     name = Column(String(128), nullable=False)
     image = image_attachment('ReceiptImage')
-    data = Column(JSON, nullable=True)
-    status = Column(String(16), nullable=False)
+    data = Column(JSONB, nullable=True)
+    success = Column(Boolean, nullable=False)
 
     def dict(self):
         return {
             'name': self.name,
             'created': self.created,
-            'status': self.status,
+            'success': self.success,
             'data': self.data
         }
 

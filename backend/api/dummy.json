@@ -1,0 +1,113 @@
+{
+    "ocr_type" : "receipts",
+    "request_id" : "P_81.200.16.220_le4ihq94_jfx",
+    "ref_no" : "AspDemo_1676395315892_570",
+    "file_name" : "image.jpg",
+    "request_received_on" : 1676395323689,
+    "success" : true,
+    "image_width" : 4032,
+    "image_height" : 3024,
+    "image_rotation" : -1.567,
+    "recognition_completed_on" : 1676395328001,
+    "receipts" : [ {
+      "merchant_name" : "Перекрёсток",
+      "merchant_address" : null,
+      "merchant_phone" : null,
+      "merchant_website" : null,
+      "merchant_tax_reg_no" : null,
+      "merchant_company_reg_no" : null,
+      "region" : null,
+      "mall" : null,
+      "country" : "US",
+      "receipt_no" : "11630188",
+      "date" : "2023-02-13",
+      "time" : "22:18",
+      "items" : [ {
+        "amount" : 149.99,
+        "category" : null,
+        "description" : "НДС 20% ЧИМ Наб. д/салата из1149.99",
+        "flags" : "",
+        "qty" : null,
+        "remarks" : null,
+        "tags" : null,
+        "unitPrice" : null
+      }, {
+        "amount" : 59.99,
+        "category" : null,
+        "description" : "НДС 10% ПР.МАС.Лапша По-дон159.99 =",
+        "flags" : "",
+        "qty" : null,
+        "remarks" : null,
+        "tags" : null,
+        "unitPrice" : null
+      }, {
+        "amount" : 99.99,
+        "category" : null,
+        "description" : "НДС 10% HOCHL. Сыр С ЗЕЛЕН.ТВ 1ШТ99.99 =",
+        "flags" : "",
+        "qty" : null,
+        "remarks" : null,
+        "tags" : null,
+        "unitPrice" : null
+      }, {
+        "amount" : 79.01,
+        "category" : null,
+        "description" : "КАРТА КЛУБА: 7789 **** 0274СКИДКА:",
+        "flags" : "",
+        "qty" : null,
+        "remarks" : null,
+        "tags" : null,
+        "unitPrice" : null
+      }, {
+        "amount" : 309.97,
+        "category" : null,
+        "description" : "БАЛАНС БАЛЛОВ:24Итог:",
+        "flags" : "",
+        "qty" : null,
+        "remarks" : null,
+        "tags" : null,
+        "unitPrice" : null
+      }, {
+        "amount" : 309.97,
+        "category" : null,
+        "description" : "НАЛИЧНЫМИБЕЗНАЛИЧНЫМИ",
+        "flags" : "",
+        "qty" : null,
+        "remarks" : null,
+        "tags" : null,
+        "unitPrice" : null
+      }, {
+        "amount" : 14.54,
+        "category" : null,
+        "description" : "СУММА НДС 20% 25.00 СУММА НДС 100%",
+        "flags" : "",
+        "qty" : null,
+        "remarks" : null,
+        "tags" : null,
+        "unitPrice" : null
+      } ],
+      "currency" : "USD",
+      "total" : 309.97,
+      "subtotal" : null,
+      "tax" : null,
+      "service_charge" : null,
+      "tip" : null,
+      "payment_method" : null,
+      "payment_details" : null,
+      "credit_card_type" : null,
+      "credit_card_number" : "0274",
+      "ocr_text" : "        Перекрёсток\n                   КАССОВЫЙ ЧЕК/ПРИХОД\n НДС 20% ЧИМ Наб. д/салата из        1           149.99 149.99\n НДС 10% ПР.МАС.Лапша По-дон         1            59.99 = 59.99\n НДС 10% HOCHL. Сыр С ЗЕЛЕН.ТВ 1            ШТ    99.99 = 99.99\n КАРТА КЛУБА: 7789 **** 0274         СКИДКА:         79.01\n БАЛАНС БАЛЛОВ:   24                        Итог:       309.97\n НАЛИЧНЫМИ              БЕЗНАЛИЧНЫМИ     309.97\n СУММА НДС 20% 25.00 СУММА НДС 100%       14.54\n АО \"ТД Перекресток\"              ИНН: 7728025110\n    : OCH MECTО РАСЧЕТОЕ: 2572 Красногорск Подмоско\n 143401. 50. Mосковская область, г. Красногорск. П\n ОДМОСКОВНЫЙ б-р. 9\n Кассир: Хурбе Ирина Ильинична. Ассистент зоны КСо\n 13.02.23 22:18 Касса: 5\n  : 1562431634                    01: 0000031486\n PH KKT: 0001473301048119 KKT: 00106906388901\n  : 9960440502969565\n       13.02.23 22:11 T: 11630188 M: 990000044875\n         : 065124        RRN: 304419307224        ЧЕК 0263\n                       MIR < E > *820?  AID: A0000006581010\n          ПАО СБЕРБАНК       Оплата ОДОБРЕНО\n       Клиент:                               ORLOV/ALEKSEY\n       Сумма < Руб >: 309.97  Комиссия за операцию 0 руб.\n                  Подпись клиента не требуется\n            F552C0323EF7AB12E3FD09B2DBBF3537EA1ECF52",
+      "ocr_confidence" : 92.22,
+      "width" : 1838,
+      "height" : 2033,
+      "avg_char_width" : 28.9489,
+      "avg_line_height" : 48.5339,
+      "source_locations" : {"date" : [ [ { "y" : 2423, "x" : 2458 }, { "y" : 1978, "x" : 2459 }, { "y" : 1978, "x" : 2509 }, { "y" : 2423, "x" : 2508 } ] ],
+        "receipt_no" : [ [ { "y" : 1519, "x" : 2782 }, { "y" : 1263, "x" : 2784 }, { "y" : 1263, "x" : 2840 }, { "y" : 1519, "x" : 2838 } ] ],
+        "credit_card_number" : [ [ { "y" : 2433, "x" : 1841 }, { "y" : 1495, "x" : 1847 }, { "y" : 1495, "x" : 1898 }, { "y" : 2433, "x" : 1892 } ] ],
+        "merchant_name" : [ [ { "y" : 2252, "x" : 1223 }, { "y" : 677, "x" : 1246 }, { "y" : 680, "x" : 1448 }, { "y" : 2255, "x" : 1425 } ] ],
+        "doc" : [ [ { "y" : 2490, "x" : 1130 }, { "y" : 467, "x" : 1137 }, { "y" : 475, "x" : 3374 }, { "y" : 2498, "x" : 3367 } ] ]
+      }
+    } ]
+}
+  
