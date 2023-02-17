@@ -4,6 +4,8 @@ import Input from './input'
 import Form from './form'
 import Item from './item'
 import Select from './select'
+import MyBlock from './block'
+import CreatableSelect from './creatable_select'
 
 export {
   Input,
@@ -11,6 +13,8 @@ export {
   FileInput,
   Form,
   Item,
-  Select
+  Select,
+  MyBlock,
+  CreatableSelect
   
 }

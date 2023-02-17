@@ -1,0 +1,40 @@
+.form {
+    margin: 0 auto;
+    padding-top: 0;
+    min-width: 500px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+
+.title {
+    width: 40%;
+    margin: 5%;
+
+    display: inline-flex;
+}
+
+.totalParent {
+    width: 40%;
+    height: fit-content;
+
+
+    display: inline-block;
+    vertical-align: top;
+    justify-content: flex-end;
+}
+
+.total {
+    width: 50%;
+    display: inline-block;
+    text-align: right;
+    justify-content: right;
+    font-size: 25px;
+}
+
+.payers {
+    display: block;
+    margin-left: 20%;
+    height: 40%;
+
+}

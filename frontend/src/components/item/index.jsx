@@ -1,17 +1,19 @@
 import { useState } from 'react'
 import styles from './styles.module.css'
-import { Select } from '../../components'
+import { CreatableSelect } from '../../components'
+import range from '../../utils/range'
 
 
-const Index = (obj) => {
-    const key = obj['obj'][0]
-    const item = obj['obj'][1]
-    const [itemOwner, setItemOwner] = useState('')
+const Item = ({obj}) => {
+
+    const index = obj[0]
+    const item = obj[1]
+    const [selectCnt, setSelectCnt] = useState(0)
 
     return (
         <div className={styles.item}>
             <div className={styles.itemDesc}>
-                {key}. {item['description']}
+                {index}. {item['description']}
             </div>
             <div className={styles.itemQty}>
                 {item['qty'] ? item['qty'] : 1} 
@@ -19,14 +21,18 @@ const Index = (obj) => {
             <div className={styles.itemAmt}>
                 {item['amount']}Р  
             </div>
-            <Select
-                onChange = {e => {
-                    const value = e.target.value
-                    setItemOwner(value)
-                }}
-            />
+            <div className={styles.inputField}>
+                {range(0, selectCnt).map(i => <CreatableSelect key={i} index={i} item_index={index}/>)}
+                <button
+                    style={{float: 'right'}}
+                    onClick={e => {
+                        e.preventDefault()
+                        setSelectCnt(selectCnt+1)
+                    }}
+                >Share</button>
+            </div>
         </div>
     );
 };
 
-export default Index;
+export default Item;

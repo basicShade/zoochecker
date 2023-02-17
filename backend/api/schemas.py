@@ -18,12 +18,14 @@ class ItemSchema(BaseModel):
     description: str
     qty: Optional[int]
     unitPrice: Optional[int]
+    payers: List = []
 
 
 class ReceiptSchema(BaseModel):
     merchant_name: Optional[str]
     date: Union[datetime, str]
     items: List[ItemSchema]
+    total: int
 
 
 class OCRSchema(BaseModel):
@@ -52,8 +54,3 @@ if __name__ == '__main__':
         # x = json.load(f)
         y = OCRSchema.parse_raw(f.read())
         pprint.pprint(y)
-
-
-
-
-0
