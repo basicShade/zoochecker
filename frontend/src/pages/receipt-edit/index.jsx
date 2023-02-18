@@ -1,4 +1,4 @@
-import { Item, Form } from '../../components'
+import { Item, Form, PayersList } from '../../components'
 import styles from './styles.module.css'
 import { useState, useEffect } from 'react'
 import api from '../../api'
@@ -11,7 +11,7 @@ const ReceiptEdit = () => {
     const params = useParams()
     const [receipt, setReceipt] = useState({})
     const [items, setItems] = useState({})
-    const [ownersList, setOwnersList] = useState([])
+    const [paiersList, setPaiersList] = useState([])
     const [total, setTotal] = useState(0)
 
     const [fetchReceipt, isLoading, error] = useFetching(async (id) => {
@@ -28,8 +28,8 @@ const ReceiptEdit = () => {
         <ReceiptContext.Provider value={{
             items,
             setItems,
-            ownersList,
-            setOwnersList,
+            paiersList,
+            setPaiersList,
             total,
             setTotal
         }}>
@@ -41,25 +41,13 @@ const ReceiptEdit = () => {
                         <div className={styles.totalParent}>
                             <p className={styles.total}>{total}Р</p>
                             <p className={styles.total}>{receipt.data.total}Р</p>
-                            <div className={styles.payers}>
-                                {ownersList.map((i) =>
-                                    <div key={ownersList.indexOf(i)}>
-                                        {ownersList.indexOf(i)+1}. {i.label} = {i['total']}
-                                    </div>
-                                )}
-                            </div>
+                            <PayersList className={styles.payers} payersList={paiersList} />
                         </div>
                         <div>Дата: {receipt.data.date}</div>
                         <div>Заведение: {receipt.data.merchant_name}</div>
-                        {
-                        Object.entries(items).map((item) => {
-                            return (
-                                <Item key={item[0]} obj={item}/>
-                            )
-                        })
-
-                        }
-
+                        {Object.entries(items).map((item) => {
+                            return <Item key={item[0]} obj={item}/>
+                        })}
                     </Form>
                 }            
             </div>

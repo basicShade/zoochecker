@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import styles from './styles.module.css'
 import { CreatableSelect } from '../../components'
-import range from '../../utils/range'
-
+import { ReceiptContext } from '../../context'
+import { range } from '../../utils'
+import styles from './styles.module.css'
 
 const Item = ({obj}) => {
 
     const index = obj[0]
     const item = obj[1]
-    const [selectCnt, setSelectCnt] = useState(0)
+    const [selectCnt, setSelectCnt] = useState(0)   // счетчик количества select блоков
 
     return (
         <div className={styles.item}>
@@ -22,7 +22,14 @@ const Item = ({obj}) => {
                 {item['amount']}Р  
             </div>
             <div className={styles.inputField}>
-                {range(0, selectCnt).map(i => <CreatableSelect key={i} index={i} item_index={index}/>)}
+                {range(0, selectCnt).map(i =>
+                    <CreatableSelect
+                        key={i}
+                        index={i}
+                        item_index={index}
+                        ReceiptContext={ReceiptContext}
+                    />
+                )}
                 <button
                     style={{float: 'right'}}
                     onClick={e => {

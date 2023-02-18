@@ -1,5 +1,6 @@
 import json
 import pprint
+import math
 
 from enum import Enum
 from datetime import datetime
@@ -14,19 +15,26 @@ from pydantic import BaseModel, validator, Json
 
 
 class ItemSchema(BaseModel):
-    amount: int
+    amount: float
     description: str
     qty: Optional[int]
     unitPrice: Optional[int]
     payers: List = []
+
+    @validator('amount')
+    def amount_is_rounded_up(cls, v):
+        return int(math.ceil(v))
 
 
 class ReceiptSchema(BaseModel):
     merchant_name: Optional[str]
     date: Union[datetime, str]
     items: List[ItemSchema]
-    total: int
+    total: float
 
+    @validator('total')
+    def total_is_rounded_up(cls, v):
+        return int(math.ceil(v))
 
 class OCRSchema(BaseModel):
     success: bool
