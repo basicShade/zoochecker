@@ -60,13 +60,13 @@ const ReceiptEdit = () => {
                             <div className={styles.title}>{receipt.name}</div>
                             <div>
                                 <div className={styles.total}>
-                                    <span style={{'font-size': '15px', 'float': 'left'}}>
+                                    <span style={{'fontSize': '15px', 'float': 'left'}}>
                                         Раcпределено:
                                     </span><br/>
                                     {total}Р
                                 </div>
                                 <div className={styles.total}>
-                                    <span style={{'font-size': '15px', 'float': 'left', 'margin-left': '15px'}}>
+                                    <span style={{'fontSize': '15px', 'float': 'left', 'marginLeft': '15px'}}>
                                         Всего:
                                     </span><br/>
                                     {receipt.data.total}Р
@@ -89,7 +89,7 @@ const ReceiptEdit = () => {
                                 }
                                 <Button
                                     className={styles.buttonRight}
-                                    onClick={e => {e.preventDefault(); navigate('/receipts/')}}
+                                    onClick={e => {e.preventDefault(); navigate('/receipts')}}
                                     >На главную
                                 </Button>
                             </div>

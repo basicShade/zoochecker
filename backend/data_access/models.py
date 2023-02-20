@@ -22,6 +22,7 @@ class Receipt(Base):
 
     def dict(self):
         return {
+            'id': self.id,
             'name': self.name,
             'created': self.created,
             'success': self.success,

@@ -14,9 +14,6 @@ const Receipt = ({receipt}) => {
     // }
     const navigate = useNavigate();
     const payersList = getPaiersList(receipt)
-    console.log(receipt)
-
-
 
     return (
         <div className={styles.receipt}>

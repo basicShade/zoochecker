@@ -52,6 +52,7 @@ class CreateReceipt(BaseModel):
 
 
 class GetReceipt(BaseModel):
+    id: int
     name: str
     created: datetime
     success: bool

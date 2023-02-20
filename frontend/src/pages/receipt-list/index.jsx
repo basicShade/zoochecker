@@ -15,8 +15,6 @@ const ReceiptList = () => {
     const [fetchReceiptList, isLoading, fetchError] = useFetching(async () => {
         const response = await api.getReceiptList()
         setReceiptList(response.data)
-        // console.log(response.data)
-
     })
 
     useEffect(() => {
