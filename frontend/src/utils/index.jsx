@@ -27,7 +27,7 @@ export const getPaiersList = (receipt) => {
   let items = receipt['data']['items']
   items.map((item) => {
     item['payers'].map((p) => {
-      if (!pList.find(i => i.value === p)) {
+      if (p && !pList.find(i => i.value === p)) {
         let payer = {value: p, label: p}
         payer['total'] = getPaierTotal(payer, items)
         pList.push(payer)

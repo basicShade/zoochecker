@@ -23,12 +23,17 @@ const ReceiptList = () => {
 
     return(
         <div>
-            {isLoading
-                ? <div>Loading...</div>
-                : <Form className={styles.form}>
-                    <Button className={styles.button} onClick={e => {e.preventDefault(); navigate('/')}}>+ Добавить чек</Button>
-                    {receiptList.map((receipt) => {return <Receipt key={receipt.id} receipt={receipt}/>})}
-                </Form>
+            {fetchError
+                ? <div>Ошибка: сервер не отвечает</div>
+                : <div>
+                    {isLoading
+                        ? <div>Loading...</div>
+                        : <Form className={styles.form}>
+                            <Button className={styles.button} onClick={e => {e.preventDefault(); navigate('/')}}>+ Добавить чек</Button>
+                            {receiptList.map((receipt) => {return <Receipt key={receipt.id} receipt={receipt}/>})}
+                          </Form>
+                    }
+                  </div>
             }
         </div>
     )

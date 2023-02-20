@@ -62,6 +62,13 @@ class GetReceipt(BaseModel):
 class PatchReceipt(BaseModel):
     data: dict
 
+    @validator('data')
+    def check_and_remove_empty_paier_positions(cls, v):
+        """Удаляет пустые записи из списков payers (пустые select'ы в форме)"""
+        for item in v['items']:
+            item['payers'] = [p for p in item['payers'] if p is not None]
+        return v
+
 if __name__ == '__main__':
     with open('dummy.json', 'rb') as f:
         # x = json.load(f)

@@ -33,6 +33,8 @@ const ReceiptEdit = () => {
         e.preventDefault()
         if (isSending) return
         setIsSending(true)
+        console.log(paiersList)
+        console.log(receipt)
         await api.patchReceipt(id, receipt)
         setIsSending(false)
         setIsSaved(true)
@@ -53,54 +55,59 @@ const ReceiptEdit = () => {
             
         }}>
             <div>
-                {isLoading
-                    ? <div>Loading...</div>
-                    : <Form className={styles.form}>
-                        <div className={styles.header}>
-                            <div className={styles.title}>{receipt.name}</div>
-                            <div>
-                                <div className={styles.total}>
-                                    <span style={{'fontSize': '15px', 'float': 'left'}}>
-                                        Раcпределено:
-                                    </span><br/>
-                                    {total}Р
+                {fetchError
+                    ? <div>Ошибка: сервер не отвечает</div>
+                    : <div>
+                        {isLoading
+                            ? <div>Loading...</div>
+                            : <Form className={styles.form}>
+                                <div className={styles.header}>
+                                    <div className={styles.title}>{receipt.name}</div>
+                                    <div>
+                                        <div className={styles.total}>
+                                            <span style={{'fontSize': '15px', 'float': 'left'}}>
+                                                Раcпределено:
+                                            </span><br/>
+                                            {total}Р
+                                        </div>
+                                        <div className={styles.total}>
+                                            <span style={{'fontSize': '15px', 'float': 'left', 'marginLeft': '15px'}}>
+                                                Всего:
+                                            </span><br/>
+                                            {receipt.data.total}Р
+                                        </div>
+                                        <PayersList className={styles.payers} payersList={paiersList} />
+                                    </div>
+                                    <div>
+                                        Дата: {receipt.data.date}<br/>
+                                        Заведение: {receipt.data.merchant_name}
+                                    </div>
+                                    <div>
+                                        {!isSaved
+                                            ? <Button
+                                                className={styles.buttonRight}
+                                                // clickHandler={api.patchReceipt}
+                                                onClick={e => {saveReceipt(e, params.id, receipt)}}//api.patchReceipt(params.id, receipt); setIsSaved(true)}}
+                                            >Сохранить изменения
+                                            </Button>
+                                            : ''
+                                        }
+                                        <Button
+                                            className={styles.buttonRight}
+                                            onClick={e => {e.preventDefault(); navigate('/receipts')}}
+                                            >На главную
+                                        </Button>
+                                    </div>
+                                    
                                 </div>
-                                <div className={styles.total}>
-                                    <span style={{'fontSize': '15px', 'float': 'left', 'marginLeft': '15px'}}>
-                                        Всего:
-                                    </span><br/>
-                                    {receipt.data.total}Р
-                                </div>
-                                <PayersList className={styles.payers} payersList={paiersList} />
-                            </div>
-                            <div>
-                                Дата: {receipt.data.date}<br/>
-                                Заведение: {receipt.data.merchant_name}
-                            </div>
-                            <div>
-                                {!isSaved
-                                    ? <Button
-                                        className={styles.buttonRight}
-                                        // clickHandler={api.patchReceipt}
-                                        onClick={e => {saveReceipt(e, params.id, receipt)}}//api.patchReceipt(params.id, receipt); setIsSaved(true)}}
-                                      >Сохранить изменения
-                                      </Button>
-                                    : ''
-                                }
-                                <Button
-                                    className={styles.buttonRight}
-                                    onClick={e => {e.preventDefault(); navigate('/receipts')}}
-                                    >На главную
-                                </Button>
-                            </div>
-                            
-                        </div>
-                        {Object.entries(items).map((item) => {
-                            return <Item key={item[0]} obj={item}/>
-                        })}
-                        
-                    </Form>
-                }            
+                                {Object.entries(items).map((item) => {
+                                    return <Item key={item[0]} obj={item}/>
+                                })}
+                                
+                            </Form>
+                        }            
+                    </div>
+                }
             </div>
         </ReceiptContext.Provider>
     )
