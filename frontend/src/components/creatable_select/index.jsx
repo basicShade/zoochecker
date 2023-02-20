@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import CreatableSelect from 'react-select/creatable';
-import { getPaierTotal, updatePaiersTotals } from '../../utils';
+import { getPaiersList, getPaierTotal, updatePaiersTotals } from '../../utils';
 import styles from './styles.module.css';
 // interface Option {
 //   readonly label: string;
@@ -13,11 +13,11 @@ const createOption = (label) => ({
 });
 
 const PayerSelect = ({index, item_index, ReceiptContext}) => {
-  const [value, setValue] = useState()//<Option & null>()
+  const {items, paiersList, setPaiersList, total, setTotal, setIsSaved } = useContext(ReceiptContext)
+  // console.log(items[item_index])
+  // console.log(items[item_index]['payers'])
+  const [value, setValue] = useState(paiersList.find(i => i.value === items[item_index]['payers'][index]))//<Option & null>()
   const [isLoading, setIsLoading] = useState(false);
-  const {
-    items, setItems, paiersList, setPaiersList, total, setTotal
-  } = useContext(ReceiptContext)
 
   const handleCreate = (inputValue) => {
     setIsLoading(true);
@@ -25,21 +25,31 @@ const PayerSelect = ({index, item_index, ReceiptContext}) => {
     setValue(newOption);
 
     paiersList[paiersList.length] = newOption
-    items[item_index]['payers'][index] = newOption
+    items[item_index]['payers'][index] = newOption['value']
 
     setTotal(updatePaiersTotals(paiersList, items))
-    setIsLoading(false);
+    setIsSaved(false)
+    setIsLoading(false)
   };
 
   const handleChange = (newValue) => {
     setIsLoading(true);
     setValue(newValue)
-
-    if (newValue) {items[item_index]['payers'][index] = newValue}
+    // console.log(newValue)
+    if (newValue) {items[item_index]['payers'][index] = newValue['value']}
     else {items[item_index]['payers'][index]=null}
-
+    // console.log(value)
+    // console.log(value)
     setTotal(updatePaiersTotals(paiersList, items))
+    setPaiersList([...paiersList])
+    // setTotal(updatePaiersTotals(paiersList, items))
+    // console.log(paiersList)
+    // setPaiersList(paiersList)
+    // console.log(paiersList)
+    setIsSaved(false)
     setIsLoading(false)
+    // console.log(newValue)
+    // console.log(value)
   }
 
   return (
@@ -52,6 +62,8 @@ const PayerSelect = ({index, item_index, ReceiptContext}) => {
       onCreateOption={handleCreate}
       options={paiersList}
       value={value}
+      // defaultValue={{label: 'hacha', value: 'hachik'}}
+      // defaultInputValue={value}
     />
   );
 };

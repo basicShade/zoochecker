@@ -7,6 +7,7 @@ import Select from './select'
 import MyBlock from './block'
 import CreatableSelect from './creatable_select'
 import PayersList from './payers-list'
+import Receipt from './receipt'
 
 export {
   Input,
@@ -17,6 +18,7 @@ export {
   Select,
   MyBlock,
   CreatableSelect,
-  PayersList
+  PayersList,
+  Receipt
   
 }

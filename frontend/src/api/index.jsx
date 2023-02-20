@@ -31,6 +31,19 @@ class Api {
         return response;
     }
 
+    async getReceiptList() {
+      const response = await axios.get(this._url + '/receipts/')
+      return response;
+  }
+
+    async patchReceipt (id, receipt) {
+      const response = await axios.patch(
+        this._url + '/receipts/' + id,
+        {data: receipt.data}
+      )
+      return response
+    }
+
 }
 
 export default new Api(import.meta.env.VITE_API_URL, { 'content-type': 'application/json' })

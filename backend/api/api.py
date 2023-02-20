@@ -5,11 +5,13 @@ from requests import get
 from fastapi import HTTPException, Request, Response
 
 from starlette import status
+from starlette.responses import Response
 
-from api.schemas import CreateReceipt, GetReceipt
+from api.schemas import CreateReceipt, GetReceipt, PatchReceipt
 from api.server import server, session_maker, store
 from api.schemas import OCRSchema
 from data_access.models import Receipt
+from sqlalchemy import update
 from sqlalchemy_imageattach.context import store_context
 
 
@@ -34,10 +36,15 @@ def get_receipt(receipt_id: int):
                 detail=f'Receipt with ID={receipt_id} is not found'
             )
         return receipt
-        
+
+@server.get('/receipts')        
+def get_receipt_list():
+    with session_maker() as session:
+        receipt = session.query(Receipt).order_by(Receipt.created.desc()).all()[:3]
+        return receipt
 
 @server.post('/create_receipt', response_model=GetReceipt, status_code=status.HTTP_201_CREATED)
-def create_receipt(request: Request, payload: CreateReceipt):
+def create_receipt(payload: CreateReceipt):
     with session_maker() as session:
         ocr_results = {}
         with open('api/dummy.json', 'rb') as dummy:
@@ -49,7 +56,7 @@ def create_receipt(request: Request, payload: CreateReceipt):
             success=ocr_results.success,
             data=ocr_results.receipts[0].dict()
         )
-
+        # breakpoint()
         format, imgstr = payload.image.split(';base64,')
         ext = format.split('/')[-1]
         image_obj = base64.b64decode(imgstr)
@@ -60,3 +67,14 @@ def create_receipt(request: Request, payload: CreateReceipt):
             session.commit()
         receipt=receipt.dict()
     return receipt
+
+@server.patch(
+        '/receipts/{receipt_id}',
+        # status_code=status.HTTP_200_OK,
+        # response_class=Response
+)
+def patch_receipt(receipt_id: int, payload: PatchReceipt):
+    with session_maker() as session:
+        # breakpoint()
+        session.query(Receipt).filter_by(id=receipt_id).update({'data': payload.data})
+        session.commit()

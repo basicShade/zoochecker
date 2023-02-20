@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 
 export const useFetching = (callback) => {
     const [isLoading, setIsLoading] = useState(true)
@@ -16,4 +16,12 @@ export const useFetching = (callback) => {
     }
 
     return [fetching, isLoading, error]
+}
+
+export const useDidMountEffect = (func, deps) => {
+    const didMount = useRef(false)
+    useEffect(() => {
+        if (didMount.current) func();
+        else didMount.current = true;
+    }, deps);
 }

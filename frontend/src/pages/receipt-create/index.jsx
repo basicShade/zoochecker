@@ -2,8 +2,10 @@ import { Form, FileInput, Button, Input } from '../../components'
 import styles from './styles.module.css'
 import { useState } from 'react'
 import api from '../../api'
+import { useNavigate } from 'react-router-dom'
 
 const ReceiptCreate = () => {
+    const navigate = useNavigate()
     const [ receiptFile, setReceiptFile ] = useState(null)
     const [ receiptName, setReceiptName ] = useState('')
 
@@ -45,7 +47,9 @@ const ReceiptCreate = () => {
                     label='Фото'>
                 </FileInput>
 
-                <Button>Сохранить чек</Button>
+                <Button className={styles.button} onClick={e => {e.preventDefault(); navigate('/receipts/')}}>На главную</Button>
+                <Button className={styles.button}>Сохранить чек</Button>
+                
 
         </Form>
     )

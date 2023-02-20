@@ -6,6 +6,7 @@ const Button = ({
   modifier = 'style_light-blue',
   href,
   clickHandler,
+  onClick,
   className,
   disabled,
   type = 'button'
@@ -25,7 +26,7 @@ const Button = ({
   return <button
     className={classNames}
     disabled={disabled}
-    onClick={_ => clickHandler && clickHandler()}
+    onClick={onClick}//{_ => clickHandler && clickHandler()}
   >
     {children}
   </button>

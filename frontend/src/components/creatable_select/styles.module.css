@@ -11,11 +11,5 @@
   font-size: 16px;
   margin-bottom: 2px;
   justify-content: right;
-}
-
-@media screen and (max-width: 680px) {
-
-  .inputField {
-    width: 82%;
-  }
+  width: 100%;
 }

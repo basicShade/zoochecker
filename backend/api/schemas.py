@@ -57,6 +57,10 @@ class GetReceipt(BaseModel):
     success: bool
     data: dict
 
+
+class PatchReceipt(BaseModel):
+    data: dict
+
 if __name__ == '__main__':
     with open('dummy.json', 'rb') as f:
         # x = json.load(f)

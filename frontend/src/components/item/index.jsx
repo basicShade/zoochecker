@@ -8,7 +8,7 @@ const Item = ({obj}) => {
 
     const index = obj[0]
     const item = obj[1]
-    const [selectCnt, setSelectCnt] = useState(0)   // счетчик количества select блоков
+    const [selectCnt, setSelectCnt] = useState(item.payers.length ? item.payers.length-1 : 0)   // счетчик количества select блоков
 
     return (
         <div className={styles.item}>
