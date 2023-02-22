@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from './styles.module.css'
 import PayersList from "../payers-list"
-import { getPaiersList } from "../../utils"
+import { getPaiersList, getReceiptTotal } from "../../utils"
 import Button from "../button"
 
 const Receipt = ({receipt}) => {
@@ -28,7 +28,7 @@ const Receipt = ({receipt}) => {
                 onClick={e => {e.preventDefault(); navigate('/receipts/' + receipt.id)}}
             >Редактировать
             </Button>
-            <p>Распределено: {payersList.reduce((a,b) => a + b['total'], 0)} из {receipt.data.total}</p>
+            <p>Распределено: {payersList.reduce((a,b) => a + b['total'], 0)} из {getReceiptTotal(receipt.data.items)}</p>
         </div>
     )
 }

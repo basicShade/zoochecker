@@ -6,7 +6,7 @@ import api from '../../api'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useFetching } from '../../hooks'
 import { ReceiptContext } from '../../context'
-import { getPaiersList, updatePaiersTotals } from '../../utils'
+import { getPaiersList, updatePaiersTotals, getReceiptTotal } from '../../utils'
 import { Component } from 'react'
 
 import { EditText, EditTextarea } from 'react-edit-text';
@@ -18,17 +18,31 @@ const ReceiptEdit = () => {
     const [receipt, setReceipt] = useState({})
     const [items, setItems] = useState({})
     const [paiersList, setPaiersList] = useState([])
-    const [total, setTotal] = useState(0)
+    const [total, setTotal] = useState(0) //сумма распределенная между paiers
+    const [receiptTotal, setReceiptTotal] = useState(0)
     const [isUpdated, setIsUpdated] = useState(true) //пересчитаны суммы в заголовке чека
     const [isSaved, setIsSaved] = useState(true) //сохранено в базе данных
     const [isSending, setIsSending] = useState(false)
     const [isFirstLoad, setIsFirstLoad] = useState(true)
-    
+
+    const createItem = (items) => {
+        const newItem = {
+                qty: 1,
+                amount: null,
+                payers: [],
+                unitPrice: null,
+                description: ''
+        }
+        setItems([...items, newItem])
+        setIsUpdated(false)
+    };
+
     const [fetchReceipt, isLoading, fetchError] = useFetching(async (id) => {
         const response = await api.getReceipt(id)
         let items = response.data.data.items
         let paiersList = getPaiersList(response.data)
         let total = paiersList.reduce((a, b) => a+b.total, 0)
+        setReceiptTotal(getReceiptTotal(items))
         setReceipt(response.data)
         setItems(items)
         setPaiersList(paiersList)
@@ -51,7 +65,9 @@ const ReceiptEdit = () => {
 
     useEffect(() => {
         if (isFirstLoad) {setIsFirstLoad(false); return}
+        if (isUpdated) return
         setTotal(updatePaiersTotals(paiersList, items))
+        setReceiptTotal(getReceiptTotal(items))
         setIsSaved(false)
         setIsUpdated(true)
      }, [isUpdated])
@@ -65,7 +81,8 @@ const ReceiptEdit = () => {
             total,
             setTotal,
             setIsSaved,
-            setIsUpdated
+            setIsUpdated,
+            receiptTotal, setReceiptTotal
 
         }}>
             <div>
@@ -95,20 +112,12 @@ const ReceiptEdit = () => {
                                             <span style={{'fontSize': '15px', 'float': 'left', 'marginLeft': '15px'}}>
                                                 Всего (руб):
                                             </span><br/>
- 
-                                            <EditText
-                                                type="number" inline showEditButton
-                                                style={{width: '60px', fontSize: '25px'}}
-                                                defaultValue={receipt.data.total}
-                                                onSave={(n)=>{receipt.data.total=n.value; setIsSaved(false)}}
-                                            />
+                                            {receiptTotal}
                                         </div>
                                         <PayersList className={styles.payers} payersList={paiersList} />
                                     </div>
                                     <div>
                                         Дата: <EditText
-                                            // onChange={(e)=>console.log(e)}
-                                            // onEditMode={(e)=>console.log(e)}
                                             type='date' inline showEditButton
                                             style={{width: '95%', whiteSpace: 'pre-wrap'}}
                                             defaultValue={receipt.data.date}
@@ -143,6 +152,11 @@ const ReceiptEdit = () => {
                                 {Object.entries(items).map((item) => {
                                     return <Item key={item[0]} obj={item}/>
                                 })}
+                                <Button
+                                    className={styles.buttonRight}
+                                    onClick={e => {e.preventDefault(); createItem(items)}}
+                                    >Добавить
+                                </Button>
                                 
                             </Form>
                         }            

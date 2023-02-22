@@ -9,7 +9,7 @@ from fastapi import HTTPException, Request, Response
 from starlette import status
 from starlette.responses import Response
 
-from settings import RECEIPT_OCR_ENDPOINT
+from settings import RECEIPT_OCR_ENDPOINT, USE_DUMMY_OCR
 from api.schemas import CreateReceipt, GetReceipt, PatchReceipt
 from api.server import server, session_maker, store
 from api.schemas import OCRSchema
@@ -42,17 +42,22 @@ def create_receipt(payload: CreateReceipt):
         ext = format.split('/')[-1]
         image_obj = base64.b64decode(imgstr)
 
-        dummy = requests.post(
-            RECEIPT_OCR_ENDPOINT,
-            data={
-                'api_key': 'TEST',
-                'recognizer': 'auto',
-                'ref_no': 'ocr_python_123',
-            },
-            files={'file': image_obj}
-        )
+        if USE_DUMMY_OCR:
+            data = {}
+            with open('api/dummy.json', 'rb') as f:
+                data = f.read()
+        else:
+            data = requests.post(
+                RECEIPT_OCR_ENDPOINT,
+                data={
+                    'api_key': 'TEST',
+                    'recognizer': 'auto',
+                    'ref_no': 'ocr_python_123',
+                },
+                files={'file': image_obj}
+            ).content
 
-        ocr_results = OCRSchema.parse_raw(dummy.content)
+        ocr_results = OCRSchema.parse_raw(data)
         # ocr_results = {}
         # with open('api/dummy.json', 'rb') as dummy:
         #     ocr_results = OCRSchema.parse_raw(dummy.read())

@@ -11,6 +11,14 @@ export const getPaierTotal = (paier, items) => {
     return Math.ceil(paierTotal)
 }
 
+export const getReceiptTotal = (items) => {
+  // возвращает сумму всех позиций
+  return Math.ceil(
+    items.reduce((total, item) => total+Number(item['amount']), 0)
+  )
+}
+
+
 export const updatePaiersTotals = (paiersList, items) => {
     //обновляет total в paiersList
     let grossTotal = 0

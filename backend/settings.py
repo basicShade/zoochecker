@@ -11,3 +11,4 @@ BASE_DIR = Path(__file__).resolve().parent
 IMAGES_FOLDER = os.path.join(BASE_DIR, 'images')
 
 RECEIPT_OCR_ENDPOINT = 'https://ocr.asprise.com/api/v1/receipt'
+USE_DUMMY_OCR = True

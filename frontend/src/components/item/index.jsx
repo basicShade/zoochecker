@@ -22,6 +22,7 @@ const Item = ({obj}) => {
                     <EditText
                         type='string' inline
                         style={{width: '95%', whiteSpace: 'pre-wrap'}}
+                        placeholder='название...'
                         defaultValue={item['description']}
                         onSave={(n)=>{item['description']=n.value; setIsSaved(false)}}
                     />
@@ -36,7 +37,8 @@ const Item = ({obj}) => {
                     <EditText
                         type="number" inline
                         style={{width: '50px'}}
-                        defaultValue={item['amount'] ? item['amount'] : 1}
+                        defaultValue={item['amount']}
+                        placeholder={0}
                         onSave={(n)=>{item['amount']=n.value; setIsUpdated(false)}}
                     /><span style={{paddingRight: '20px'}}>Р</span>
                 </div>
@@ -62,6 +64,7 @@ const Item = ({obj}) => {
                     onClick={(e) => {
                         e.preventDefault()
                         setItems(items.filter(item => item !== items[index]))
+                        setIsUpdated(false)
                     }}
                 >X</button>
             </div>
