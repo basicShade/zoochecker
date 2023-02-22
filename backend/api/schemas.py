@@ -28,7 +28,7 @@ class ItemSchema(BaseModel):
 
 class ReceiptSchema(BaseModel):
     merchant_name: Optional[str]
-    date: Union[datetime, str]
+    date: Union[datetime, str, None]
     items: List[ItemSchema]
     total: float
 

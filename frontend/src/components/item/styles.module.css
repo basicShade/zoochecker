@@ -4,7 +4,7 @@
     min-width: 350px;
     display: flex;
     padding: 15px;
-    padding-right: 25px;
+    padding-right: 15px;
     border: 2px solid lightblue;
     margin-top: 15px;
     border-radius: 10px;
@@ -13,8 +13,9 @@
 }
 
 .inputField {
-    flex-basis: 370px;
+    flex-basis: 40%;
     font-size: 16px;
+    /* max-width: 230px; */
   }
 /* .item {
     font-family: Montserrat, Helvetica, Arial, sans-serif;
@@ -34,29 +35,14 @@
 } */
 
 .itemDesc {
-    justify-content: space-between;
-    display: flex;
-    max-width: 50%;
-    min-width: 150px;
+    display: inline-flex;
+    max-width: 40%;
+    min-width: 40%;
+    padding-right: 15px;
+
 
 }
 
-.itemQty {
-    /* position: relative;
-    float: right; */
-    padding-left: 3%;
-}
-
-.itemAmt {
-    /* position: relative;
-    float: right; */
-    padding-left: 3%;
-    padding-right: 3%;
-}
-
-
-
-  
 
 @media screen and (max-width: 720px) {
 

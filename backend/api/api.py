@@ -1,3 +1,4 @@
+import requests
 from time import sleep
 import base64
 import json
@@ -8,6 +9,7 @@ from fastapi import HTTPException, Request, Response
 from starlette import status
 from starlette.responses import Response
 
+from settings import RECEIPT_OCR_ENDPOINT
 from api.schemas import CreateReceipt, GetReceipt, PatchReceipt
 from api.server import server, session_maker, store
 from api.schemas import OCRSchema
@@ -35,10 +37,25 @@ def get_receipt(receipt_id: int):
 @server.post('/create_receipt/', response_model=GetReceipt, status_code=status.HTTP_201_CREATED)
 def create_receipt(payload: CreateReceipt):
     with session_maker() as session:
-        ocr_results = {}
-        with open('api/dummy.json', 'rb') as dummy:
-            ocr_results = OCRSchema.parse_raw(dummy.read())
-        sleep(5)
+
+        format, imgstr = payload.image.split(';base64,')
+        ext = format.split('/')[-1]
+        image_obj = base64.b64decode(imgstr)
+
+        dummy = requests.post(
+            RECEIPT_OCR_ENDPOINT,
+            data={
+                'api_key': 'TEST',
+                'recognizer': 'auto',
+                'ref_no': 'ocr_python_123',
+            },
+            files={'file': image_obj}
+        )
+
+        ocr_results = OCRSchema.parse_raw(dummy.content)
+        # ocr_results = {}
+        # with open('api/dummy.json', 'rb') as dummy:
+        #     ocr_results = OCRSchema.parse_raw(dummy.read())
         receipt = Receipt(
             created=datetime.utcnow(),
             name=payload.name,
@@ -46,9 +63,7 @@ def create_receipt(payload: CreateReceipt):
             data=ocr_results.receipts[0].dict()
         )
         # breakpoint()
-        format, imgstr = payload.image.split(';base64,')
-        ext = format.split('/')[-1]
-        image_obj = base64.b64decode(imgstr)
+
 
         with store_context(store):
             image = receipt.image.from_blob(image_obj)

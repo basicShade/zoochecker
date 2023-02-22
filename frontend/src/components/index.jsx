@@ -19,6 +19,6 @@ export {
   MyBlock,
   CreatableSelect,
   PayersList,
-  Receipt
+  Receipt,
   
 }
