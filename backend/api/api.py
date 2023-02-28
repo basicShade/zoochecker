@@ -17,13 +17,13 @@ from data_access.models import Receipt
 from sqlalchemy import update
 from sqlalchemy_imageattach.context import store_context
 
-@server.get('/receipts/')        
+@server.get('/api/receipts/')        
 def get_receipt_list():
     with session_maker() as session:
         receipt = session.query(Receipt).order_by(Receipt.created.desc()).all()[:3]
         return receipt
 
-@server.get('/receipts/{receipt_id}')
+@server.get('/api/receipts/{receipt_id}')
 def get_receipt(receipt_id: int):
     with session_maker() as session:
         receipt = session.query(Receipt).get(receipt_id)
@@ -34,7 +34,7 @@ def get_receipt(receipt_id: int):
             )
         return receipt
 
-@server.post('/create_receipt/', response_model=GetReceipt, status_code=status.HTTP_201_CREATED)
+@server.post('/api/create_receipt/', response_model=GetReceipt, status_code=status.HTTP_201_CREATED)
 def create_receipt(payload: CreateReceipt):
     with session_maker() as session:
 
@@ -76,7 +76,7 @@ def create_receipt(payload: CreateReceipt):
 
     return receipt
 
-@server.patch('/receipts/{receipt_id}')
+@server.patch('/api/receipts/{receipt_id}')
 def patch_receipt(receipt_id: int, payload: PatchReceipt):
     with session_maker() as session:
         session.query(Receipt).filter_by(id=receipt_id).update({'data': payload.data})
