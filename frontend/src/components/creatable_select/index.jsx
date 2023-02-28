@@ -13,7 +13,7 @@ const createOption = (label) => ({
 });
 
 const PayerSelect = ({index, item_index, ReceiptContext}) => {
-  const {items, paiersList, setPaiersList, total, setTotal, setIsSaved } = useContext(ReceiptContext)
+  const {items, paiersList, setPaiersList, total, setTotal, setIsSaved, setIsUpdated } = useContext(ReceiptContext)
   // console.log(items[item_index])
   // console.log(items[item_index]['payers'])
   const [value, setValue] = useState(paiersList.find(i => i.value === items[item_index]['payers'][index]))//<Option & null>()
@@ -26,9 +26,7 @@ const PayerSelect = ({index, item_index, ReceiptContext}) => {
 
     paiersList[paiersList.length] = newOption
     items[item_index]['payers'][index] = newOption['value']
-
-    setTotal(updatePaiersTotals(paiersList, items))
-    setIsSaved(false)
+    setIsUpdated(false)
     setIsLoading(false)
   };
 
@@ -38,18 +36,10 @@ const PayerSelect = ({index, item_index, ReceiptContext}) => {
     // console.log(newValue)
     if (newValue) {items[item_index]['payers'][index] = newValue['value']}
     else {items[item_index]['payers'][index]=null}
-    // console.log(value)
-    // console.log(value)
-    setTotal(updatePaiersTotals(paiersList, items))
-    setPaiersList([...paiersList])
     // setTotal(updatePaiersTotals(paiersList, items))
-    // console.log(paiersList)
-    // setPaiersList(paiersList)
-    // console.log(paiersList)
-    setIsSaved(false)
+    // setPaiersList([...paiersList])
+    setIsUpdated(false)
     setIsLoading(false)
-    // console.log(newValue)
-    // console.log(value)
   }
 
   return (

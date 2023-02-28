@@ -1,16 +1,16 @@
-"""add receipt and image models
+"""from scratch
 
-Revision ID: 578cb6a742c6
+Revision ID: 590c60424e44
 Revises: 
-Create Date: 2023-02-13 18:41:04.396355
+Create Date: 2023-02-28 16:25:45.505382
 
 """
 from alembic import op
 import sqlalchemy as sa
-
+from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision = '578cb6a742c6'
+revision = '590c60424e44'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,8 +22,8 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), sa.Identity(always=False, start=42, cycle=True), nullable=False),
     sa.Column('created', sa.DateTime(), nullable=False),
     sa.Column('name', sa.String(length=128), nullable=False),
-    sa.Column('data', sa.JSON(), nullable=True),
-    sa.Column('status', sa.String(length=16), nullable=False),
+    sa.Column('data', postgresql.JSONB(astext_type=sa.Text()), nullable=True),
+    sa.Column('success', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('receipt_image',

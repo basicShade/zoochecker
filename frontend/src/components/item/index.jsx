@@ -30,15 +30,15 @@ const Item = ({obj}) => {
                 <EditText
                     type="number" inline
                     style={{width: '30px', paddingRight: '20px'}}
-                    defaultValue={item['qty'] ? item['qty'] : 1}
+                    defaultValue={item['qty'] ? String(item['qty']) : String(1)}
                     onSave={(n)=>{item['qty']=n.value; setIsSaved(false)}}
                 />
                 <div>
                     <EditText
                         type="number" inline
                         style={{width: '50px'}}
-                        defaultValue={item['amount']}
-                        placeholder={0}
+                        defaultValue={String(item['amount'])}
+                        placeholder={String(0)}
                         onSave={(n)=>{item['amount']=n.value; setIsUpdated(false)}}
                     /><span style={{paddingRight: '20px'}}>Р</span>
                 </div>

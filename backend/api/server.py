@@ -16,7 +16,7 @@ server = FastAPI(debug=settings.DEBUG_MODE)
 
 session_maker = sessionmaker(
     bind=create_engine(
-        settings.DEV_DATABASE_URL,
+        settings.DB_URL,
         echo=settings.SQL_ECHO,
         # implicit_returning=False
     )
@@ -26,7 +26,7 @@ store = HttpExposedFileSystemStore(settings.IMAGES_FOLDER)
 
 server.add_middleware(
     CORSMiddleware,
-    allow_origins=['http://localhost:5173'],
+    allow_origins=[*settings.ALLOW_ORIGINS],
     allow_credentials=True,
     allow_methods=['*'],
     allow_headers=['*']

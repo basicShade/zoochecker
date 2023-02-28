@@ -9,7 +9,7 @@ from fastapi import HTTPException, Request, Response
 from starlette import status
 from starlette.responses import Response
 
-from settings import RECEIPT_OCR_ENDPOINT, USE_DUMMY_OCR
+from settings import RECEIPT_OCR_ENDPOINT, USE_DUMMY_OCR, STORE_IMAGES
 from api.schemas import CreateReceipt, GetReceipt, PatchReceipt
 from api.server import server, session_maker, store
 from api.schemas import OCRSchema
@@ -58,22 +58,19 @@ def create_receipt(payload: CreateReceipt):
             ).content
 
         ocr_results = OCRSchema.parse_raw(data)
-        # ocr_results = {}
-        # with open('api/dummy.json', 'rb') as dummy:
-        #     ocr_results = OCRSchema.parse_raw(dummy.read())
+
         receipt = Receipt(
             created=datetime.utcnow(),
             name=payload.name,
             success=ocr_results.success,
             data=ocr_results.receipts[0].dict()
         )
-        # breakpoint()
-
 
         with store_context(store):
-            image = receipt.image.from_blob(image_obj)
             session.add(receipt)
-            session.add(image)
+            if STORE_IMAGES:
+                image = receipt.image.from_blob(image_obj)
+                session.add(image)
             session.commit()
         receipt=receipt.dict()
 
