@@ -29,7 +29,7 @@ const ReceiptList = () => {
                     {isLoading
                         ? <div>Loading...</div>
                         : <Form className={styles.form}>
-                            <Button className={styles.button} onClick={e => {e.preventDefault(); navigate('/')}}>+ Добавить чек1</Button>
+                            <Button className={styles.button} onClick={e => {e.preventDefault(); navigate('/')}}>+ Добавить новый чек</Button>
                             {receiptList.map((receipt) => {return <Receipt key={receipt.id} receipt={receipt}/>})}
                           </Form>
                     }

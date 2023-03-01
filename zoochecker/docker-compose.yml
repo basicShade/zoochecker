@@ -26,7 +26,6 @@ services:
     volumes:
       - static:/app/dist/
 
-
   nginx:
     image: nginx:1.19.3
     ports:
