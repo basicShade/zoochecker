@@ -1,16 +1,5 @@
-# for frontend (npm, to os)
 # vite
 # classnames
 # react-router-dom
 # react-select
 # react-edit-text
-
-
-# for backend (pip, to venv)
-fastapi
-uvicorn
-psycopg2
-sqlalchemy
-SQLAlchemy-ImageAttach
-requests
-#sudo apt-get install libmagickwand-dev
