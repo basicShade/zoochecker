@@ -10,7 +10,7 @@ IMAGES_FOLDER = os.path.join(BASE_DIR, 'images')
 STORE_IMAGES = False
 
 RECEIPT_OCR_ENDPOINT = 'https://ocr.asprise.com/api/v1/receipt'
-USE_DUMMY_OCR = True
+USE_DUMMY_OCR = False
 
 DB = {
     'DB_ENGINE': os.getenv('DB_ENGINE'),
