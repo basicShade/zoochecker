@@ -3,7 +3,7 @@
 ### Описание:
 Если вы идете в кафе, Zoochecker поможет оцифровать кассовый чек и разделить позиции между друзьями. Zoochecker поможет увидеть кто сколько должен тому, кто расплачивался с официантом. Добавляйте фото чека, редактируйте и распределяйте позиции в чеке, сохраняйте и смотрите кому сколько переводить.
 
-Это Pet-проект по созданию SPA приложения на стеке React + FastAPI/SQLAlchemy/Pydantic/Alembic. Распознавание чека (Optical Text Recognition) выполняется внешним сервисом через API. База данных - PostgreSQL. HTTP сервер - uvicorn. Раздачу статики и проксирование на uvicorn выполняет сервер nginx. Деплой в Docker контейнерах.
+Это pet-проект по созданию SPA приложения на стеке React + FastAPI/SQLAlchemy/Pydantic/Alembic. Распознавание чека (Optical Text Recognition) выполняется внешним сервисом через API. База данных - PostgreSQL. HTTP сервер - uvicorn. Раздачу статики и проксирование на uvicorn выполняет сервер nginx. Деплой в Docker контейнерах.
 
 ### Используемые технологии
 <img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue" /> <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" /> <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" /> <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
@@ -24,7 +24,7 @@
     ```
 
 ### Запуск проекта ⚙️
-1. В терминале клонировать репозиторий и перейти в подпапку zoochecker где лежит docker-compose:
+1. В терминале клонировать репозиторий и перейти в подпапку zoochecker, где лежит docker-compose:
     ```
     git clone git@github.com:basicShade/zoochecker.git
     cd zoochecker/
